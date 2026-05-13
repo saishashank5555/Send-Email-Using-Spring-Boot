@@ -1,0 +1,99 @@
+
+ Send Email
+  -> This Project We can Learn Send Email To Any One, Using spring Boot And Java Mail Sender
+  -> This is the Dependency We Need To Add In Our Project
+            <dependency>
+    			<groupId>org.springframework.boot</groupId>
+    			<artifactId>spring-boot-starter-mail</artifactId>
+    		</dependency>
+  -> This is The Code For Sending Email To Any One
+            @Autowired
+            private JavaMailSender javaMailSender;
+
+            public void sendEmail(String to, String subject, String body) {
+                SimpleMailMessage mailMessage = new SimpleMailMessage();
+                mailMessage.setTo(to);
+                mailMessage.setSubject(subject);
+                mailMessage.setText(body);
+                javaMailSender.send(mailMessage);
+            }
+
+    -> This is The Code For Sending Email With Attachment To Any One
+            @Autowired
+            private JavaMailSender javaMailSender;
+
+            public void sendEmailWithAttachment(String to, String subject, String body, String attachmentPath) {
+                MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+                try {
+                    MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+                    helper.setTo(to);
+                    helper.setSubject(subject);
+                    helper.setText(body);
+                    FileSystemResource file = new FileSystemResource(new File(attachmentPath));
+                    helper.addAttachment(file.getFilename(), file);
+                    javaMailSender.send(mimeMessage);
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                }
+            }
+    -> JavaMailSender is Used to Send Email To Any One, It is An Interface Provided By Spring Framework,
+        It Provides Methods To Send Email To Any One, It Also Provides Methods To Send Email With Attachment To Any One,
+        It Also Provides Methods To Send Email With HTML Content To Any One, It Also Provides Methods To Send Email With Inline Resources To Any One,
+        It Also Provides Methods To Send Email With Multiple Recipients To Any One,
+        It Also Provides Methods To Send Email With CC And BCC To Any One,
+        It Also Provides Methods To Send Email With Priority To Any One,
+        It Also Provides Methods To Send Email With Read Receipt To Any One,
+        It Also Provides Methods To Send Email With Delivery Receipt To Any One,
+        It Also Provides Methods To Send Email With Custom Headers To Any One,
+        It Also Provides Methods To Send Email With Custom Properties To Any One,
+        It Also Provides Methods To Send Email With Custom Authentication To Any One,
+        It Also Provides Methods To Send Email With Custom Session To Any One,
+        It Also Provides Methods To Send Email With Custom Transport Protocols To Any One,
+        It Also Provides Methods To Send Email With Custom Mail Sender Implementation To Any One.
+    -> JavaMailSender provide Methods are
+            send(SimpleMailMessage simpleMessage)
+            send(SimpleMailMessage... simpleMessages)
+            send(MimeMessage mimeMessage)
+            send(MimeMessage... mimeMessages)
+
+    -> SimpleMailMessage is a Simple Mail Message Class Provided By Spring Framework,
+       It is Used To Create A Simple Mail Message Object,
+       It Provides Methods To Set The To, Subject, Text, From, ReplyTo, CC, BCC, Priority, Read Receipt, Delivery Receipt,
+       Custom Headers, Custom Properties, Custom Authentication, Custom Session, Custom Transport Protocols, Custom Mail
+       Sender Implementation Of The Email To Be Sent.
+    -> MimeMessageHelper is a Mime Message Helper Class Provided By Spring Framework,
+       It is Used To Create A Mime Message Object,
+       It Provides Methods To Set The To, Subject, Text, From, ReplyTo, CC, BCC, Priority, Read Receipt, Delivery Receipt,
+       Custom Headers, Custom Properties, Custom Authentication, Custom Session, Custom Transport Protocols, Custom Mail
+       Sender Implementation Of The Email To Be Sent.
+    -> SimpleMailMessage Provides Methods are
+            setTo(String to)
+            setSubject(String subject)
+            setText(String text)
+            setFrom(String from)
+            setReplyTo(String replyTo)
+            setCc(String cc)
+            setBcc(String bcc)
+            setPriority(int priority)
+            setReadReceipt(boolean readReceipt)
+            setDeliveryReceipt(boolean deliveryReceipt)
+            addHeader(String name, String value)
+            addProperty(String name, Object value)
+    -> MimeMessageHelper Provides Methods are
+            setTo(String to)
+            setSubject(String subject)
+            setText(String text)
+            setFrom(String from)
+            setReplyTo(String replyTo)
+            setCc(String cc)
+            setBcc(String bcc)
+            setPriority(int priority)
+            setReadReceipt(boolean readReceipt)
+            setDeliveryReceipt(boolean deliveryReceipt)
+            addHeader(String name, String value)
+            addProperty(String name, Object value)
+            addAttachment(String attachmentFilename, InputStreamSource inputStreamSource)
+            addAttachment(String attachmentFilename, File file)
+            addAttachment(String attachmentFilename, DataSource dataSource)
+            addInline(String contentId, InputStreamSource inputStreamSource)
+            
